@@ -18,15 +18,15 @@ func isPrime() func(num int) bool{
     return f
 }
 
-func createArray(low, high int, f func(n int) bool, res []int) []int{
+func createPrimes(low, high int, f func(n int) bool, res []int) []int{
     if(low > high) {
         return res
     }
 
     if(f(low)) {
-        return createArray(low + 1, high, f, append(res, low))
+        return createPrimes(low + 1, high, f, append(res, low))
     } else {
-        return createArray(low + 1, high, f, res)
+        return createPrimes(low + 1, high, f, res)
     }
 }
 
@@ -36,7 +36,7 @@ func findPrimeNumbers(low, high int) []int{
        return []int{}
     }
 
-    return createArray(low, high, isPrime(), []int{})
+    return createPrimes(low, high, isPrime(), []int{})
 }
 
 func printRes(primes []int) {
