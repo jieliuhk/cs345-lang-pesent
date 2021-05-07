@@ -4,37 +4,48 @@ import (
    "math"
 )
 
-func printPrimeNumbers(num1, num2 int){
-   if num1<2 || num2<2{
-      fmt.Println("Numbers must be greater than 2.")
-      return
-   }
+func isPrime() func(num int) bool{
+    f := func(num int) bool {
+        for i:=2; i<=int(math.Sqrt(float64(num))); i++{
+            if num % i == 0{
+                return false
+            }
+        }
 
-   for num1 <= num2 {
-      //implicit type
-      isPrime := true
-      //mainifest type, the following code won't compile
-      //isPrime = "true"
+        return true
+    }
 
-      //static type
-      for i:=2; i<=int(math.Sqrt(float64(num1))); i++{
-         if num1 % i == 0{
-            isPrime = false
-            break
-         }
-      }
-      if isPrime {
-         fmt.Printf("%d ", num1)
-      }
-      num1++
-   }
-   fmt.Println()
-   //strong type, the following code won't compile
-   //fmt.Println("complie error" + 23)
+    return f
+}
+
+func createArray(low, high int, f func(n int) bool, res []int) []int{
+    if(low > high) {
+        return res
+    }
+
+    if(f(low)) {
+        return createArray(low + 1, high, f, append(res, low))
+    } else {
+        return createArray(low + 1, high, f, res)
+    }
+}
+
+func findPrimeNumbers(low, high int) []int{
+    if low<2 || high<2{
+       fmt.Println("Numbers must be greater than 2.")
+       return []int{}
+    }
+
+    return createArray(low, high, isPrime(), []int{})
+}
+
+func printRes(primes []int) {
+    fmt.Println(primes)
 }
 
 func main(){
-   printPrimeNumbers(5, 19)
-   printPrimeNumbers(0, 2)
-   printPrimeNumbers(13, 100)
+    printRes(findPrimeNumbers(5, 19))
+    printRes(findPrimeNumbers(0, 2))
+    printRes(findPrimeNumbers(13, 100))
 }
+
