@@ -12,6 +12,8 @@ func printPrimeNumbers(num1, num2 int){
 
    for num1 <= num2 {
       //implicit type
+      //var isPrime bool
+      //isPrime = true
       isPrime := true
       //mainifest type, the following code won't compile
       //isPrime = "true"
@@ -31,6 +33,8 @@ func printPrimeNumbers(num1, num2 int){
    fmt.Println()
    //strong type, the following code won't compile
    //fmt.Println("complie error" + 23)
+   //this will work
+   fmt.Println("compiled: " + string(66))
 }
 
 func main(){
