@@ -1,7 +1,7 @@
 package main
 import (
    "fmt"
-   "math"
+   "github.com/jieliuhk/cs345-lang-pesent/oo/mytype"
 )
 
 func printPrimeNumbers(num1, num2 int){
@@ -11,26 +11,20 @@ func printPrimeNumbers(num1, num2 int){
    }
 
    for num1 <= num2 {
-      //implicit type
-      isPrime := true
-      //mainifest type, the following code won't compile
-      //isPrime = "true"
+       myint := mytype.MyInt{
+        Value: num1
+       }
+      isPrime := myint.IsPrime()
 
-      //static type
-      for i:=2; i<=int(math.Sqrt(float64(num1))); i++{
-         if num1 % i == 0{
-            isPrime = false
-            break
-         }
-      }
       if isPrime {
          fmt.Printf("%d ", num1)
+      } else {
+        break
       }
+
       num1++
    }
    fmt.Println()
-   //strong type, the following code won't compile
-   //fmt.Println("complie error" + 23)
 }
 
 func main(){
