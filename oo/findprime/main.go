@@ -12,14 +12,12 @@ func printPrimeNumbers(num1, num2 int){
 
    for num1 <= num2 {
        myint := mytype.MyInt{
-        Value: num1
+        Value: num1,
        }
       isPrime := myint.IsPrime()
 
       if isPrime {
          fmt.Printf("%d ", num1)
-      } else {
-        break
       }
 
       num1++
